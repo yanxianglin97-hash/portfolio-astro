@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const allProjects = await getCollection('projects');
+const projects = allProjects.sort((a, b) => b.data.year - a.data.year);
+---
+
+<Layout title="Projects" description="林彥翔 — 作品列表">
+  <div class="container">
+    <div style="padding: 2.4rem 0 0;">
+      <p class="label">作品 / Projects</p>
+    </div>
+    <div class="projects-grid">
+      {projects.map(project => (
+        <a href={`/projects/${project.id}`} class="project-card">
+          <div class="card-img">
+            <img
+              src={project.data.coverImage}
+              alt={project.data.titleZh}
+              loading="lazy"
+            />
+          </div>
+          <div class="card-year">{project.data.year}</div>
+          <div class="card-title">{project.data.titleZh}</div>
+          <div class="card-title-en">{project.data.titleEn}</div>
+          <div class="card-medium">{project.data.medium}</div>
+        </a>
+      ))}
+    </div>
+  </div>
+</Layout>

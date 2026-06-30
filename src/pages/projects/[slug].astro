@@ -1,0 +1,76 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map(project => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { data } = project;
+const { Content } = await render(project);
+
+const galleryImages = data.images;
+const isMulti = galleryImages.length >= 2;
+---
+
+<Layout
+  title={`${data.titleZh} — ${data.titleEn}`}
+  description={data.descZh.slice(0, 120)}
+>
+  <div class="container">
+    <div class="project-hero">
+
+      <a href="/projects" class="back-link">← Projects</a>
+
+      <div class="project-hero-title">
+        <h1>{data.titleZh}</h1>
+        <div class="en-title">{data.titleEn}</div>
+      </div>
+
+      <div class="project-meta-row">
+        <span>{data.year}</span>
+        <span>{data.medium} / {data.mediumEn}</span>
+        {data.duration   && <span>{data.duration}</span>}
+        {data.dimensions && <span>{data.dimensions}</span>}
+      </div>
+    </div>
+
+    <!-- Cover image -->
+    <div class="gallery-cover project-gallery">
+      <img src={data.coverImage} alt={data.titleZh} />
+    </div>
+
+    <!-- Bilingual description -->
+    <div class="project-text">
+      <div class="zh">
+        {data.descZh.split('\n').filter((p: string) => p.trim()).map((p: string) => (
+          <p style="margin-bottom:0.9em">{p.trim()}</p>
+        ))}
+      </div>
+      <div class="en">
+        {data.descEn.split('\n').filter((p: string) => p.trim()).map((p: string) => (
+          <p style="margin-bottom:0.9em">{p.trim()}</p>
+        ))}
+      </div>
+    </div>
+
+    <!-- Extra gallery images -->
+    {galleryImages.length > 0 && (
+      <div class={`project-gallery ${isMulti ? 'gallery-2' : ''}`} style="margin-top:1.4rem;">
+        {galleryImages.map((img: string) => (
+          <img src={img} alt={data.titleZh} loading="lazy" />
+        ))}
+      </div>
+    )}
+
+    <!-- MDX body (optional extended notes) -->
+    <div style="padding: 2rem 0; font-size:0.88rem; line-height:1.85; max-width:640px;">
+      <Content />
+    </div>
+  </div>
+</Layout>

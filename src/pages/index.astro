@@ -1,0 +1,89 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="林彥翔 Lin Yan-Xiang" description="藝術家 林彥翔 個人網站">
+  <div class="container">
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-text">
+        <h1 class="artist-name">
+          林彥翔
+          <span>Lin, Yan-Xiang</span>
+        </h1>
+        <p class="bio">
+          1997 年生於桃園。畢業於國立臺北藝術大學跨域藝術研究所。<br />
+          創作涉及影像、行動及書寫，以生態、地緣政治與宗教信仰為研究核心，
+          透過田野調查與藝術介入提出問題，並以「行動電影」作為其實踐的方法論。
+        </p>
+        <p class="bio-en">
+          Born in 1997 in Taoyuan, Taiwan. Graduated from the Graduate Institute of
+          Trans-disciplinary Arts, Taipei National University of the Arts (TNUA).<br />
+          Working across video, action, and writing — with research centred on ecology,
+          geopolitics, and religion — he proposes <em>activist cinema</em> as a methodology
+          for artistic intervention.
+        </p>
+      </div>
+      <div class="hero-photo">
+        <img src="/images/profile.jpg" alt="林彥翔 Lin Yan-Xiang" width="160" height="160" />
+      </div>
+    </div>
+
+    <!-- Current exhibitions -->
+    <section>
+      <p class="label">展出資訊 / Current</p>
+      <div class="entry">
+        <span class="entry-year">2025</span>
+        <div>
+          <div class="entry-title">寶藏巖夏日藝術展 <span class="tag">進行中</span></div>
+          <div class="entry-meta">寶藏巖國際藝術村 ／ 2025.06.20 — 08.16</div>
+          <div class="entry-meta-en">Treasure Hill Artist Village</div>
+        </div>
+      </div>
+      <div class="entry">
+        <span class="entry-year">2025</span>
+        <div>
+          <div class="entry-title">桃園國際藝術大獎 <span class="tag">入選</span></div>
+          <div class="entry-meta">桃園市立美術館</div>
+          <div class="entry-meta-en">Taoyuan International Art Award</div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+.hero {
+  padding: 4rem 0 2.4rem;
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+}
+.hero-text { flex: 1; }
+.artist-name {
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  margin-bottom: 1.6rem;
+  line-height: 1.3;
+}
+.artist-name span {
+  display: block;
+  font-size: 0.9rem;
+  letter-spacing: 0.18em;
+  color: #999;
+  margin-top: 0.3rem;
+  text-transform: uppercase;
+}
+.bio    { font-size: 0.9rem;  line-height: 1.9; margin-bottom: 1rem; }
+.bio-en { font-size: 0.84rem; line-height: 1.9; color: #666; }
+.hero-photo { flex-shrink: 0; }
+.hero-photo img {
+  width: 160px; height: 160px;
+  object-fit: cover;
+}
+@media (max-width: 560px) {
+  .hero { flex-direction: column-reverse; gap: 1.4rem; }
+  .hero-photo img { width: 120px; height: 120px; }
+}
+</style>
