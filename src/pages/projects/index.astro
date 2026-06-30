@@ -4,6 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 
 const allProjects = await getCollection('projects');
 const projects = allProjects.sort((a, b) => b.data.year - a.data.year);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <Layout title="Projects" description="林彥翔 — 作品列表">
@@ -13,7 +14,7 @@ const projects = allProjects.sort((a, b) => b.data.year - a.data.year);
     </div>
     <div class="projects-grid">
       {projects.map(project => (
-        <a href={`/projects/${project.id}`} class="project-card">
+        <a href={`${base}/projects/${project.id}`} class="project-card">
           <div class="card-img">
             <img
               src={project.data.coverImage}
