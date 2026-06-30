@@ -8,11 +8,12 @@ interface Props {
 
 const { title = '林彥翔 Lin Yan-Xiang', description = 'Artist portfolio' } = Astro.props;
 const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const navLinks = [
-  { href: '/cv',       labelZh: 'CV',       labelEn: 'CV' },
-  { href: '/projects', labelZh: 'Projects', labelEn: 'Projects' },
-  { href: '/contact',  labelZh: 'Contact',  labelEn: 'Contact' },
+  { href: `${base}/cv`,       labelEn: 'CV' },
+  { href: `${base}/projects`, labelEn: 'Projects' },
+  { href: `${base}/contact`,  labelEn: 'Contact' },
 ];
 ---
 
@@ -28,12 +29,12 @@ const navLinks = [
   <body>
     <header class="site-header">
       <div class="header-inner">
-        <a href="/" class="site-logo">林彥翔 LIN YAN-XIANG</a>
+        <a href={`${base}/`} class="site-logo">林彥翔 LIN YAN-XIANG</a>
         <nav class="site-nav">
           {navLinks.map(link => (
             <a
               href={link.href}
-              aria-current={currentPath.startsWith(link.href) ? 'page' : undefined}
+              aria-current={currentPath.startsWith(link.href.replace(base, '')) ? 'page' : undefined}
             >
               {link.labelEn}
             </a>
